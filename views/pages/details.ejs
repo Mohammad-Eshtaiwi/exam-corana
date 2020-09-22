@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="/">home</a>
+                <a href="/allCountries">all countries</a>
+                <a href="/myRecords">my records</a>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <div>
+                    <h2>country: <%= item.country %></h2>
+                    <p>totalConfirmed <%= item.totalConfirmed %></p>
+                    <p>totalDeaths <%= item.totalDeaths %></p>
+                    <p>totalRecovered <%= item.totalRecovered %></p>
+                    <p>date <%= item.date %></p>
+                    <br />
+                    <form action="/delete?_method=DELETE">
+                        <input type="hidden" name="country" value="<%= item.country %>" />
+                        <button type="submit">delete</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

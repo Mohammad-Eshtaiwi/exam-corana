@@ -50,29 +50,44 @@ function Country(item) {
 app.post("/addCountry", async (req, res) => {
     console.log("booooooooody", req.body);
     const safeValues = [req.body.country, req.body.totalConfirmed, req.body.totalDeaths, req.body.totalRecovered, req.body.date];
-    const insert = `INSERT INTO country (country,
-        totalConfirmed,
-        totalDeaths,
-        totalRecovered,
-        date)
-        VALUES
-        ($1,$2,$3,$4,$5);
-        `;
+    const insert = `INSERT INTO country (country,totalConfirmed,totalDeaths,totalRecovered,date)VALUES($1,$2,$3,$4,$5);`;
     // console.log(insert);
-    const { rows: countries } = client
-        .query(insert, safeValues)
-        .then(data => {
-            console.log("hiii");
-            console.log("teeeeeeeest", countries);
-            res.redirect("/myRecords/?country=" + req.body.country);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    debugger;
+    const test = client.query(insert, safeValues);
+
+    console.log("hiii");
+    console.log("teeeeeeeest", test);
+    // res.redirect("/myRecords/?country=" + req.body.country);
+    res.redirect("/myRecords" + req.body.country);
 });
-app.get("/myRecords", (req, res) => {
+app.get("/myRecords", async (req, res) => {
+    // let select = `select * from country where country = $1`;
+    let select = `select * from country`;
+
+    let { rows } = await client.query(select);
+
+    console.log("daaaaaaaaaaata", rows);
+    res.render("./pages/myRecords", { rows });
+});
+app.get("/details", async (req, res) => {
     let select = `select * from country where country = $1`;
-    const { rows: country } = client.query(select, [req.query.country]);
-    console.log("daaaaaaaaaaata", country);
+
+    let { rows } = await client.query(select, [req.query.country]);
+    let item = rows[0];
+    console.log("daaaaaaaaaaata", item);
+    res.render("./pages/details", { item });
 });
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+app.get("/delete", async (req, res) => {
+    //     DELETE FROM table_name
+    // WHERE condition;
+    let select = `delete  from country where country = $1`;
+
+    let item = await client.query(select, [req.query.country]);
+
+    console.log("delete", item);
+    res.redirect("/myRecords");
+});
+
+client.connect().then(() => {
+    app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+});
