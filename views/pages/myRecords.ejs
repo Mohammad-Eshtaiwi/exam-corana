@@ -15,7 +15,7 @@
         </header>
         <main>
             <section>
-                <% rows.forEach(item=>{%>
+                <% if (rows.length === 0) { %> norecords <% } %> <% rows.forEach(item=>{%>
                 <div>
                     <h2>country: <%= item.country %></h2>
                     <p>totalConfirmed <%= item.totalConfirmed %></p>
