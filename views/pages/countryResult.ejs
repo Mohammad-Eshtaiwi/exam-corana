@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>country result</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="/">home</a>
+                <a href="/allCountries">all countries</a>
+                <a href="">my records</a>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <% result.forEach(item=>{%>
+                <div>
+                    <p><%= item.Date %></p>
+                    <p><%= item.Cases %></p>
+                </div>
+                <%}) %>
+            </section>
+        </main>
+    </body>
+</html>

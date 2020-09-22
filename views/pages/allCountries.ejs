@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="/">home</a>
+                <a href="/allCountries">all countries</a>
+                <a href="">my records</a>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <% countries.forEach(item=>{%>
+                <div>
+                    <h2>country: <%= item.country %></h2>
+                    <p>totalConfirmed <%= item.totalConfirmed %></p>
+                    <p>totalDeaths <%= item.totalDeaths %></p>
+                    <p>totalRecovered <%= item.totalRecovered %></p>
+                    <p>date <%= item.date %></p>
+                    <form action="/addCountry" method="POST">
+                        <input type="hidden" name="country" value="<%= item.country %>" />
+                        <input type="hidden" name="totalConfirmed" value="<%= item.totalConfirmed %>" />
+                        <input type="hidden" name="totalDeaths" value="<%= item.totalDeaths %>" />
+                        <input type="hidden" name="totalRecovered" value="<%= item.totalRecovered %>" />
+                        <input type="hidden" name="date" value="<%= item.date %>" />
+                        <button type="submit">add country to your record</button>
+                    </form>
+                </div>
+                <%}) %>
+            </section>
+        </main>
+    </body>
+</html>

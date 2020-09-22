@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>home</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="/">home</a>
+                <a href="/allCountries">all countries</a>
+                <a href="">my records</a>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <h2>total</h2>
+
+                <div>TotalConfirmed <%= total.TotalConfirmed %></div>
+                <div>TotalDeaths <%= total.TotalDeaths %></div>
+                <div>TotalRecovered <%= total.TotalRecovered %></div>
+            </section>
+            <section class="search">
+                <h2>search for country data</h2>
+                <form action="/search" method="POST">
+                    <input type="text" placeholder="country name" name="name" />
+                    <input type="date" name="from" id="from" />
+                    <input type="date" name="to" id="from" />
+                    <button type="submit">search</button>
+                </form>
+            </section>
+        </main>
+    </body>
+</html>
